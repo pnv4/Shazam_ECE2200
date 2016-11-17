@@ -96,25 +96,15 @@ for peak = 1:size(peakIn,2)
          if((row>257) | peakIn(1,peak)>257 | (col>936) | peakIn(2,peak)>936)
              count = count+1;
          end
-            % If there is one peak found in submatrix
-            F1 = [F1 F(peakIn(1,peak))];
-            F2 = [F2;F(row)];
-            T1 = [T1 T(peakIn(2,peak))];
-            T2 = [T2 T(col)];
-            
-         % If there are 2 peaks found in submatrix
-         if(nnz(A)/2==2)
-            F1 = [F1 F(peakIn(1,peak))];
-            T1 = [T1 T(peakIn(2,peak))];
-         end 
          
-         % If there are 3 peaks found in submatrix
-         else if(nnz(A)/2==3)
-            F1 = [F1 F(peakIn(1,peak))];
-            F1 = [F1 F(peakIn(1,peak))];
+           k = 0;
+           while k ~= nnz(A)/2;     % add F1 repeatly as the # of pair
+            F1 = [F1 F(peakIn(1,peak))];    
             T1 = [T1 T(peakIn(2,peak))];
-            T1 = [T1 T(peakIn(2,peak))];
-         end 
+            k = k+1;
+           end
+           F2 = [F2;F(row)]; 
+           T2 = [T2 T(col)];
         end
     end
 end
